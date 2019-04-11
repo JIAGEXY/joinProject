@@ -26,10 +26,10 @@ public class R extends HashMap<String,Object> {
         this.msg = msg;
     }
     public static R ok(){
-        return new R(0);
+        return new R(200,"SUCCESS");
     }
     public static R ok(String msg){
-        return new R(0,msg);
+        return new R(200,msg);
     }
     public static R error(){
         return new R(1);
