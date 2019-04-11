@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class R extends HashMap<String,Object> {
     private int code;
     private String msg;
+
+
     public R() { }
     public R(int code){ this.put("code",code); }
     public R(int code, String msg){
