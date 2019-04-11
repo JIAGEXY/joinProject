@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--
+            配置链接数据库的内容driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql:///pet_hospital"
+                        userId="root"
+                        password="admin"
+        -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql:///ms"
+                        userId="root"
+                        password="jiayu0217">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--实体类位置-->
+        <javaModelGenerator targetPackage="com.lh.entity" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--mapper映射文件位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!--mapper接口位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lh.mapper"
+                             targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="ms_user"/>
+        <table tableName="ms_room"/>
+        <table tableName="ms_desc"/>
+        <table tableName="ms_order"/>
+        <table tableName="ms_sleeper"/>
+        <table tableName="ms_notice"/>
+        <table tableName="ms_article"/>
+        <table tableName="ms_review"/>
+        <table tableName="ms_lable"/>
+        <table tableName="ms_hobby"/>
+        <table tableName="ms_user_room"/>
+        <table tableName="ms_user_art"/>
+        <table tableName="ms_art_lable"/>
+        <table tableName="ms_room_notice"/>
+        <table tableName="ms_user_hobby"/>
+
+    </context>
+</generatorConfiguration>
