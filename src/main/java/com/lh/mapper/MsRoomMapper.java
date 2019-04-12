@@ -93,4 +93,7 @@ public interface MsRoomMapper {
      * @mbggenerated Mon Apr 15 08:29:49 CST 2019
      */
     int updateByPrimaryKey(MsRoom record);
+
+    //查询用户收藏房屋
+    List<MsRoom> selectHouseCollect(Long uid);
 }

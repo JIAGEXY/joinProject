@@ -68,7 +68,7 @@ public class Shiro {
         map.put("/login.html","anon");
         map.put("/captcha.jpg","anon");//验证码
         map.put("/ms/login","anon");
-        map.put("/**","user");
+       // map.put("/**","user");
         //map.put("/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
