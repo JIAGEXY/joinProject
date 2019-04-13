@@ -1,7 +1,5 @@
 package com.lh.utils;
 
-import com.lh.entity.MsRoom;
-import net.sf.ehcache.pool.sizeof.filter.PassThroughFilter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;

@@ -2,9 +2,11 @@ package com.lh.controller;
 
 import com.lh.entity.MsRoom;
 import com.lh.service.MsRoomService;
+import com.lh.utils.Load;
 import com.lh.utils.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +18,11 @@ import java.io.InputStream;
 public class MsRoomServlet {
     @Resource
     private MsRoomService service;
-    @RequestMapping
-    public R insert(MsRoom room, HttpServletRequest request, HttpServletResponse response){
-        try {
-            InputStream is = request.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @RequestMapping("/ms/landlord/publish")
+    public R houseReleased(MsRoom room, HttpServletRequest request,
+                           HttpServletResponse response, MultipartFile roomimg){
+        String r = Load.upLoadRoomImg(request,response,roomimg);
+        room.setRoomimg(r);
         return service.insert(room);
     }
 }
