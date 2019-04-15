@@ -64,7 +64,7 @@ public class Shiro {
         //访问静态资源 待定
         /*map.put("/public/**","anon");//静态js，css
         map.put("/json/**","anon");//假数据*/
-        map.put("/a","anon");
+        map.put("/ms/**","anon");
         map.put("/login.html","anon");
         map.put("/captcha.jpg","anon");//验证码
         map.put("/ms/login","anon");
