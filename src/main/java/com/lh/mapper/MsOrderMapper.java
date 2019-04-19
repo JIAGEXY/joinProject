@@ -93,4 +93,12 @@ public interface MsOrderMapper {
      * @mbggenerated Mon Apr 15 08:29:49 CST 2019
      */
     int updateByPrimaryKey(MsOrder record);
+
+
+    //新增订单（包含阿里支付数据）
+    int insertALOrder(MsOrder order);
+    //更新订单
+    int updateALOrder(MsOrder order);
+    //查询订单
+    MsOrder selectALOrder(String ordernum);
 }

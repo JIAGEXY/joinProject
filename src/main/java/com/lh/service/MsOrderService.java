@@ -33,4 +33,11 @@ import com.lh.utils.R;
 public interface MsOrderService {
 
     R insertOrder(MsOrder msOrder);
+
+    //新增订单（包含阿里支付数据）
+    R insertALOrder(MsOrder order);
+    //更新订单
+    int updateALOrder(MsOrder order);
+    //查询订单
+    MsOrder selectALOrder(String ordernum);
 }

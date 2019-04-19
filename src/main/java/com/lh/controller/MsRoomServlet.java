@@ -16,7 +16,8 @@ import java.io.InputStream;
 public class MsRoomServlet {
     @Resource
     private MsRoomService service;
-    //@RequestMapping
+
+    @RequestMapping("")
     public R insert(MsRoom room, HttpServletRequest request, HttpServletResponse response){
         try {
             InputStream is = request.getInputStream();

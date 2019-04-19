@@ -1,13 +1,4 @@
-package com.lh.controller;
-
-import com.lh.entity.MsOrder;
-import com.lh.service.MsOrderService;
-import com.lh.utils.R;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
+package com.lh.utils;
 
 /**
  * //                            _ooOoo_
@@ -33,19 +24,14 @@ import javax.annotation.Resource;
  * //                  佛祖镇楼                  BUG辟易
  *
  * @Description:
- * @Date: 2019/4/11
- * @Time: 22:00
+ * @Date: 2019/4/14
+ * @Time: 19:47
  */
-@RestController
-public class MsOrderServlet {
-    @Resource
-    private MsOrderService msOrderService;
-
-    //新增订单
-    @RequestMapping("/ms/user/orderadd")
-    public R insertOrder(@RequestBody MsOrder msOrder){
-        return msOrderService.insertALOrder(msOrder);
-    }
-
+public interface OrderStatus {
+    int PREPAID=1;//已支付,待入驻
+    int UNPAID=0;//未支付
+    int CANCEL=2;//已取消
+    int FAIL=3;//交易失败
+    int APPRAISE=4;//待评价
 
 }
