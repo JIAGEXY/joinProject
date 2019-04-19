@@ -59,13 +59,13 @@ public class MsOrderServiceImpl implements MsOrderService {
     @Override
     public R insertALOrder(MsOrder order) {
 
-        order.setOrderinfo("预定房屋");
+        order.setDerinfo("预定房屋");
         //MsUser user=(MsUser)ShiroUtils.getCurrentUser();
         //msOrder.setUserId(user.getUserId);
         order.setUserid(Long.parseLong("1"));
-        order.setOrdernum(System.currentTimeMillis()+order.getUserid().toString());
+        order.setOrdernumber(System.currentTimeMillis()+order.getUserid().toString());
         order.setStatus(OrderStatus.UNPAID);
-        order.setOrderinfo("预定房间");
+        order.setDerinfo("预定房间");
         if(order.getMoney()==null){
             order.setMoney(new BigDecimal("0.00"));
         }

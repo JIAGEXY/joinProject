@@ -72,7 +72,7 @@ public class AliPayController {
             String total_amount = order.getMoney().toString();
             System.out.println(total_amount);
             // 商品描述，可空
-            String body = order.getOrderinfo();
+            String body = order.getDerinfo();
             // 超时时间 可空
             String timeout_express = "2m";
             // 销售产品码 必填
