@@ -410,4 +410,9 @@
       createTime = #{createtime,jdbcType=TIMESTAMP}
     where orderId = #{orderid,jdbcType=BIGINT}
   </update>
+  <select id="getOrderr" resultMap="BaseResultMap">
+
+SELECT ORD.* FROM ms_order ORD INNER JOIN ms_desc des ON ord.`userId`=des.`userId`
+WHERE description=""
+  </select>
 </mapper>
