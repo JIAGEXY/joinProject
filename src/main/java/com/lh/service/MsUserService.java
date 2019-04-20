@@ -1,7 +1,16 @@
 package com.lh.service;
 
+import com.lh.entity.MsUser;
 import com.lh.utils.R;
 
 public interface MsUserService {
-    R login(int nowPage,int pageSize,String search);
+
+    R register(MsUser user);
+
+    MsUser findByName(String username);
+
+    R updatePassword(MsUser user);
+
+    MsUser findByPhone(String phone);
+
 }
