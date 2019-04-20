@@ -19,23 +19,40 @@ public class MsRoomServlet {
 
     //发布公告时 添加房源
     @RequestMapping("/ms/landlord/housing/{userId}")
-    public R noticeAddHouse(@PathVariable long userId){
+    public R noticeAddHouse(@PathVariable("userId") long userId) {
         return msRoomService.addHouse(userId);
     }
 
     //查询房东的所有房间
     @RequestMapping("/ms/room/published")
-    public List<MsRoom> published(@RequestBody int pageNum, int pageSize){
+    public List<MsRoom> published(@RequestBody int pageNum, int pageSize) {
 
-        return msRoomService.findById(pageNum,pageSize);
+        return msRoomService.findById(pageNum, pageSize);
 
     }
 
     //查询城市房屋
     @RequestMapping("/ms/room/cityAndRoom")
-    public R room(@RequestBody() int pageNum, int pageSize){
+    public R room(@RequestBody() int pageNum, int pageSize) {
 
-        return msRoomService.room(pageNum,pageSize);
+        return msRoomService.room(pageNum, pageSize);
 
     }
+
+    //删除房屋
+    @RequestMapping("/ms/room/del/{roomId}")
+    public R delRoom(@PathVariable("roomId")long roomId){
+
+        return msRoomService.delete(roomId);
+
+    }
+
+    //下架上架房屋
+    @RequestMapping("/ms/room/upAndDown")
+    public R upDown( MsRoom msRoom){
+
+        return msRoomService.updateRoom(msRoom);
+    }
+
+
 }

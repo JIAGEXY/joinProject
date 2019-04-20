@@ -112,4 +112,30 @@ public class MsRoomServiceImpl implements MsRoomService {
 
         return R.ok().put("data",map);
     }
+
+    @Override
+    public R delete(long roomId) {
+
+
+        int i = msRoomMapper.deleteByPrimaryKey(roomId);
+
+        if(i==0){
+            return R.error("删除失败");
+        }
+
+        return R.ok();
+    }
+
+    @Override
+    public R updateRoom(MsRoom msRoom) {
+
+
+        int i = msRoomMapper.updateByPrimaryKeySelective(msRoom);
+
+        if(i==0){
+            return R.error("修改失败");
+        }
+
+        return R.ok();
+    }
 }

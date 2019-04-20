@@ -15,4 +15,9 @@ public interface MsRoomService {
     List<MsRoom> findById(int pageNum, int pageSize);
 
     R room(int pageNum,int pageSize);
+
+    R delete(long roomId);
+
+    R updateRoom(MsRoom msRoom);
+
 }
