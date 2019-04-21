@@ -35,4 +35,11 @@ public class MsRoomServiceImpl implements MsRoomService {
         List<MsRoom> list = msRoomMapper.selectByExample(example);
         return list!=null?R.ok().put("data",list):R.error("未发布房源");
     }
+
+    @Override
+    public R houseInfo(long roomId) {
+        MsRoom msRoom = msRoomMapper.selectByPrimaryKey(roomId);
+        System.out.println(msRoom);
+        return msRoom!=null?R.ok().put("data",msRoom):R.error("查看失败");
+    }
 }
