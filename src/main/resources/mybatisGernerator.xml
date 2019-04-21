@@ -15,7 +15,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql:///ms"
                         userId="root"
-                        password="jiayu0217">
+                        password="root">
         </jdbcConnection>
 
         <javaTypeResolver >
