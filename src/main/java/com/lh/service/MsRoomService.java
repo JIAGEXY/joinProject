@@ -7,4 +7,9 @@ public interface MsRoomService {
     R insert(MsRoom room);
     R update(MsRoom room);
     R addHouse(long userId);
+
+
+
+    R houseInfo(long roomId);
+
 }
