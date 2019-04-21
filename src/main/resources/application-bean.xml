@@ -19,6 +19,11 @@
         </property>
     </bean>
     <aop:config proxy-target-class="true" >
+<<<<<<< HEAD
         <aop:advisor advice-ref="druid-stat-interceptor"  pointcut-ref="druid-stat-pointcut"/>
+=======
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut" />
+>>>>>>> 6e13e5717372feaa6e93f20c55561ca38f98c880
     </aop:config>
 </beans>
