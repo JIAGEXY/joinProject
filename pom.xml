@@ -128,6 +128,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
+        <!-- 图片服务器 -->
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27-SNAPSHOT</version>
+        </dependency>
         <!-- poi 导出成Excel -->
         <!--<dependency>
             <groupId>org.apache.poi</groupId>

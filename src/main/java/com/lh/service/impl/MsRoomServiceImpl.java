@@ -5,12 +5,15 @@ import com.lh.entity.MsRoomExample;
 import com.lh.mapper.MsRoomMapper;
 import com.lh.service.MsRoomService;
 import com.lh.utils.R;
+import com.lh.utils.UpLoad;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional
 public class MsRoomServiceImpl implements MsRoomService {
     @Resource
     private MsRoomMapper msRoomMapper;
@@ -23,8 +26,19 @@ public class MsRoomServiceImpl implements MsRoomService {
 
     @Override
     public R update(MsRoom room) {
-        int i = msRoomMapper.updateByPrimaryKey(room);
-        return i>0?R.ok():R.error("修改失败");
+        try {
+            String img = msRoomMapper.selectByPrimaryKey(room.getRoomid()).getRoomimg();
+            int i = msRoomMapper.updateByPrimaryKey(room);
+            UpLoad upLoad = new UpLoad();
+            String filename = img.substring(img.lastIndexOf("M00"));
+            if (i>0) {
+                if (upLoad.deleteFile(filename)==0)return R.ok();
+                else throw new Exception("修改失败");
+            } else R.error("修改失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return R.error("修改失败");
     }
 
     @Override
