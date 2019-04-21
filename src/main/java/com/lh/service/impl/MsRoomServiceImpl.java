@@ -26,9 +26,7 @@ public class MsRoomServiceImpl implements MsRoomService {
     @Override
     public R selectHouseCollect(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
-//      MsUser user=(MsUser) ShiroUtils.getCurrentUser();
-        MsUser user=new MsUser();
-        user.setUserid(Long.parseLong("1"));
+        MsUser user=(MsUser) ShiroUtils.getCurrentUser();
         List<MsRoom> rooms = mapper.selectHouseCollect(user.getUserid());
         PageInfo info=new PageInfo(rooms);
         return R.ok().put("data",info);

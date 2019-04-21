@@ -1,6 +1,8 @@
 package com.lh.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.lh.entity.MsSleeper;
+import com.lh.entity.MsUser;
 import com.lh.service.MsRoomService;
 import com.lh.service.MsUserService;
 import com.lh.utils.R;
@@ -31,4 +33,24 @@ public class MsUserServlet {
         System.out.println(pageInfo.getPageNum()+pageInfo.getPageSize());
         return  msRoomService.selectHouseCollect(pageInfo);
     }
+
+
+    //查询旅客等级
+    @RequestMapping("/ms/user/sleepscore")
+    public R selectLerver(){
+        return service.selectLevler();
+    }
+
+    //试睡员申请提交
+    @RequestMapping("/ms/user/cansleep")
+    public R insertSleeper(@RequestBody MsSleeper msSleeper){
+        return service.insertSleeper(msSleeper);
+    }
+
+    //修改当前用户个人资料
+    @RequestMapping("/ms/user/mydata")
+    public R updateUser(@RequestBody MsUser msUser){
+        return service.updateUser(msUser);
+    }
+
 }

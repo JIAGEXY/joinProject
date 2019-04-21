@@ -44,25 +44,12 @@ public class MsOrderServiceImpl implements MsOrderService {
     @Resource
     private MsOrderMapper msOrderMapper;
 
-
-    @Override
-    public R insertOrder(MsOrder msOrder) {
-        //MsUser user=(MsUser)ShiroUtils.getCurrentUser();
-        //msOrder.setUserId(user.getUserId);
-        msOrder.setUserid(Long.parseLong("1"));
-        int i = msOrderMapper.insert(msOrder);
-        if(i>0)
-            return R.ok("添加订单成功");
-        return R.error("添加订单失败");
-    }
-
     @Override
     public R insertALOrder(MsOrder order) {
 
         order.setDerinfo("预定房屋");
-        //MsUser user=(MsUser)ShiroUtils.getCurrentUser();
-        //msOrder.setUserId(user.getUserId);
-        order.setUserid(Long.parseLong("1"));
+        MsUser user=(MsUser)ShiroUtils.getCurrentUser();
+        order.setUserid(user.getUserid());
         order.setOrdernumber(System.currentTimeMillis()+order.getUserid().toString());
         order.setStatus(OrderStatus.UNPAID);
         order.setDerinfo("预定房间");
