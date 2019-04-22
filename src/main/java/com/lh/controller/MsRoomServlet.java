@@ -16,6 +16,18 @@ public class MsRoomServlet {
     private MsRoomService msRoomService;
     //发布房屋
     @RequestMapping("/ms/landlord/publish")
+    public R houseReleased(@RequestBody MsRoom room, HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "img") MultipartFile img){
+        String roomImg = Load.upLoadRoomImg(request,response,img);
+        room.setRoomimg(roomImg);
+        return msRoomService.insert(room);
+    }
+    //修改房屋
+    @RequestMapping("/ms/landlord/houseInfo")
+    public R houseUpdate(@RequestBody MsRoom room, HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "img") MultipartFile img){
+        String r = Load.upLoadRoomImg(request,response,img);
+        room.setRoomimg(r);
+        return msRoomService.update(room);
+=======
     public R houseReleased(MsRoom room, @RequestParam(name = "img") MultipartFile img){
         try {
             //图片名字
@@ -84,4 +96,8 @@ public class MsRoomServlet {
 
         return msRoomService.updateRoom(msRoom);
     }
+
+    //查看房屋信息
+    @RequestMapping("/ms/room/houseInfo/{roomId}")
+    public R houseInfo(@PathVariable long roomId){ return msRoomService.houseInfo(roomId); }
 }

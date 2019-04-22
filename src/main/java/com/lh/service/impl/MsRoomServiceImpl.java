@@ -8,6 +8,7 @@ import com.lh.entity.MsUser;
 import com.lh.mapper.MsRoomMapper;
 import com.lh.service.MsRoomService;
 import com.lh.utils.R;
+import com.lh.utils.UpLoad;
 import com.lh.utils.ShiroUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +32,19 @@ public class MsRoomServiceImpl implements MsRoomService {
 
     @Override
     public R update(MsRoom room) {
-        int i = msRoomMapper.updateByPrimaryKey(room);
-        return i>0?R.ok():R.error("修改失败");
+        try {
+            String img = msRoomMapper.selectByPrimaryKey(room.getRoomid()).getRoomimg();
+            int i = msRoomMapper.updateByPrimaryKey(room);
+            UpLoad upLoad = new UpLoad();
+            String filename = img.substring(img.lastIndexOf("M00"));
+            if (i>0) {
+                if (upLoad.deleteFile(filename)==0)return R.ok();
+                else throw new Exception("修改失败");
+            } else R.error("修改失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return R.error("修改失败");
     }
 
     @Override
@@ -137,5 +149,12 @@ public class MsRoomServiceImpl implements MsRoomService {
         }
 
         return R.ok();
+    }
+
+    @Override
+    public R houseInfo(long roomId) {
+        MsRoom msRoom = msRoomMapper.selectByPrimaryKey(roomId);
+        System.out.println(msRoom);
+        return msRoom!=null?R.ok().put("data",msRoom):R.error("查看失败");
     }
 }
