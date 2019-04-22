@@ -1,5 +1,6 @@
 package com.lh.service;
 
+import com.github.pagehelper.PageInfo;
 import com.lh.entity.MsRoom;
 import com.lh.utils.R;
 
@@ -17,4 +18,6 @@ public interface MsRoomService {
     R updateRoom(MsRoom msRoom);
 
     R houseInfo(long roomId);
+
+    R selectHouseCollect(PageInfo pageInfo);
 }

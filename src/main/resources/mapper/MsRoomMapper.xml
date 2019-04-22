@@ -583,4 +583,10 @@
       createTime = #{createtime,jdbcType=TIMESTAMP}
     where roomId = #{roomid,jdbcType=BIGINT}
   </update>
+
+  <select id="selectHouseCollect" resultMap="BaseResultMap" parameterType="Long">
+    SELECT r.*  FROM ms_user u INNER JOIN ms_user_room ur
+ON u.`userId`=ur.`userId` JOIN ms_room r
+ON ur.`roomId`=r.`roomId` WHERE u.`userId`=#{id}
+  </select>
 </mapper>

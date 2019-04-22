@@ -138,4 +138,12 @@ public interface MsOrderMapper {
 >>>>>>> 6e13e5717372feaa6e93f20c55561ca38f98c880
      */
     int updateByPrimaryKey(MsOrder record);
+
+
+    //新增订单（包含阿里支付数据）
+    int insertALOrder(MsOrder order);
+    //更新订单
+    int updateALOrder(MsOrder order);
+    //查询订单
+    MsOrder selectALOrder(String ordernum);
 }

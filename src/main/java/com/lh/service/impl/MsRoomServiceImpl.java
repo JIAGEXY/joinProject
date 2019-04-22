@@ -32,6 +32,20 @@ public class MsRoomServiceImpl implements MsRoomService {
 
     @Override
     public R update(MsRoom room) {
+        int i = msRoomMapper.updateByPrimaryKey(room);
+        return i>0?R.ok():R.error("修改失败");
+    }
+
+    @Override
+    public R addHouse(long userId) {
+        MsRoomExample example = new MsRoomExample();
+        MsRoomExample.Criteria criteria = example.createCriteria();
+        criteria.andUseridEqualTo(userId);
+        List<MsRoom> list = msRoomMapper.selectByExample(example);
+        return list!=null?R.ok().put("data",list):R.error("未发布房源");
+    }
+    @Override
+    public R update(MsRoom room) {
         try {
             String img = msRoomMapper.selectByPrimaryKey(room.getRoomid()).getRoomimg();
             int i = msRoomMapper.updateByPrimaryKey(room);

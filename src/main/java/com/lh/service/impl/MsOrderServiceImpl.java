@@ -13,6 +13,12 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lh.utils.ShiroUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+
 @Service
 public class MsOrderServiceImpl implements MsOrderService{
     @Resource
@@ -45,5 +51,37 @@ public class MsOrderServiceImpl implements MsOrderService{
         }
         return list;
 
+    }
+    @Resource
+    private MsOrderMapper msOrderMapper;
+
+    @Override
+    public R insertALOrder(MsOrder order) {
+
+        order.setDerinfo("预定房屋");
+        MsUser user=(MsUser)ShiroUtils.getCurrentUser();
+        order.setUserid(user.getUserid());
+        order.setOrdernumber(System.currentTimeMillis()+order.getUserid().toString());
+        order.setStatus(OrderStatus.UNPAID);
+        order.setDerinfo("预定房间");
+        if(order.getMoney()==null){
+            order.setMoney(new BigDecimal("0.00"));
+        }
+        System.out.println(order.getMoney());
+        int i = msOrderMapper.insertALOrder(order);
+        if(i>0)
+            return R.ok().put("data",order);
+        return R.error("添加失败");
+    }
+
+    @Override
+    public int updateALOrder(MsOrder order) {
+        int i = msOrderMapper.updateALOrder(order);
+        return i;
+    }
+
+    @Override
+    public MsOrder selectALOrder(String ordernum) {
+        return  msOrderMapper.selectALOrder(ordernum);
     }
 }

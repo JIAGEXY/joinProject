@@ -137,4 +137,7 @@ public interface MsRoomMapper {
 >>>>>>> 6e13e5717372feaa6e93f20c55561ca38f98c880
      */
     int updateByPrimaryKey(MsRoom record);
+
+    //查询用户收藏房屋
+    List<MsRoom> selectHouseCollect(Long uid);
 }

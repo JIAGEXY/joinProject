@@ -1,0 +1,24 @@
+package com.lh.config;
+
+public class AlipayConfig {
+	// 商户appid
+	public static String APPID = "2016092600597676";
+	// 私钥 pkcs8格式的
+	public static String RSA_PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQClJ3q0P4+9+IVFZWfsdfrNrj0guUvwC8Y0DgXAUIGlFZQaLPax7Xhyvgs+VWnWdmeSxOyIYS02r0Faf5z/Z0zkYywO6HWRPM4b5xKode8PMXjnFJz39x4qhu2vwWgUNiGPT095nxFqDKnQZcveN2gRzcOeXbk6v3hAT2+b6HL01teh9k7FQNlvLOtPqDgXg16GEzhWYMrFNimzlLx2duXgQxn4YUxusl1rNYlgGLdGXfYZfxMjl88EgskHdtAy8aTodMjlaV0AcCl/DiPSKEAaWAYqNSURdU03nFIwYwLUMqgzb9FPBlghAMQwhfD+q/pD+qazftdX6tPqXt9NvblLAgMBAAECggEBAIzQOnjQ8Pgim07uBUvB1BPmicwK8Uo8X8QmaJTuj3t4CIzA5Z4TQW1jyCZfoRvwXKLxMFOft3M2vlwxDmVdaFwaiogzf3pUA9Aalvf3hdrIbbNpCeUKWDgeTy5ZkyoYdUjBcJvcGnb3URqUkNxpFVyIuk+ezb3fXuJGWHzwFoPV/1DX5DjTa1HDHv06JLu3WPAQDXrSqxTIyZ+T47jgNfE2W1+rleOJm2N86JpYwGMBXky60Esgih4zrY8tishwee+XY+6g/sIWsZyT55GtRMjhmvSEB3IMb+kRq2H9YG73z9Z8qo5EkBzIDbjzr6DZ3aH9K2MwtNWxo10vvFFRBSECgYEA8anADXJjHgg6K3aV+ZOLOUmCcjxUW/+sXH7gl2o5RqSeMd4tsXBkcPOxOaA6LCyUH/RbiP487FjWXY+EL1YTCEkBD8MKmLuHprsIKRBeapTZYyg75/f14CrVdOV95qhhzeE9Q8YxeGgcAlIMIe35+HJFBYLdw36NeAjScUiCrhkCgYEArvPA1oJp5R/MA8UzellvZYQ218XXcc6Z1auvZHXOTJZFsW/VOKTJNIcE2zYEhRdOcapHVYYsugMDsl3UJNNmC7QSTA9aY8CSeSqadAKvUJPS01KcbbxI8azAnQH9+drVbjd+pTKhvAbjAUC45r+nC9EEwzpqJ83KNVak86VrBwMCgYEAyQgDIayEU5lYeot9m05nxNIn18vkCVwZECDjyFGvL9sFVkqTDEaI54VxapSlj9XNqv9lngKQv7PvL4mR1qbt0jiYz3nauM9XuxVfZnmdcWA9rsTrgL6/JSm8xC+cmmJ8af3zLwwSXy2MD0odmaQUC99TF5CT1mrSWIZOObquKxECgYBDpqIE0L0eCmObeZ/kSb0Xpj6GxUwACAHYa+EQmbVCTEF60WHD24SqOSOZmJO62z5MGaon2hBlhVDiogGsk8o78E+69ZzgQdDh5aWAAqHEKMU3ThSLImmaelCo5eJNwV8SlYb1XlTIHmmdTGezYpy3pwWOcIIoDh2I7o4uYOK3/QKBgEH3BavG9nlz4EDkt4u+VsB21r16uF1HYX/yOOFbvX0+ELg2wTEDIqW/OoJTp57j1RtfagjR5x0UmFQ0YtbPwFhWMI7Y327rUQChuynCwxReQBGpiO++ruu7wV0eqkTmC2yb5/nFC0i49BBbJW6kzLES15UXlKWtKC2VD8oguOZD";
+	// 服务器异步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+	public static String notify_url = "https://openapi.alipaydev.com/gateway.do/joinProject/callback";
+	// 页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址
+	public static String return_url = "https://openapi.alipaydev.com/gateway.do/joinProject/returnurl";
+	// 请求网关地址
+	public static String URL = "https://openapi.alipaydev.com/gateway.do";
+	// 编码
+	public static String CHARSET = "UTF-8";
+	// 返回格式
+	public static String FORMAT = "json";
+	// 支付宝公钥
+	public static String ALIPAY_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAva2sWd/DTSuOS5BOQ6HODHW/gJnzk42zC3/Pb9TqgpzgBmtJrNcrtd5G0UeUMogGK3ty3tnehkaRkkMtqk9ABB4Gkvn5EAklMxB9aWPEnI5ni66jK0D8Y8OpG+YRaoNLTOJop6m65YWTxY4bt1vWtddwslmJn5WAJzt9+Q6Rbo2uX3Yq6o+evPf6XNNDN6wMRKLoFteeAVOadLXEnOMPowAIG+adVhyn7F9Q/3trkzofvHilgdtwy7wK7/t2cUgIo9wOnIcP4o+pnfAZ+chfkS7DpAMpd1kW0Sw0j771f0GJLZArDKv2Ihpzey6hJ6s7cXI/Ure1oIWL9BXbck3OCQIDAQAB";
+	// 日志记录目录
+	public static String log_path = "/log";
+	// RSA2
+	public static String SIGNTYPE = "RSA2";
+}

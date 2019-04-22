@@ -2,6 +2,10 @@ package com.lh.controller;
 
 import com.google.code.kaptcha.Producer;
 import com.lh.entity.MsUser;
+import com.github.pagehelper.PageInfo;
+import com.lh.entity.MsSleeper;
+import com.lh.entity.MsUser;
+import com.lh.service.MsRoomService;
 import com.lh.service.MsUserService;
 import com.lh.utils.LoginUtils;
 import com.lh.utils.R;
@@ -29,6 +33,41 @@ public class MsUserServlet {
 
     @Resource
     private Producer producer;
+
+    @Resource
+    private MsRoomService msRoomService;
+
+    @RequestMapping("/a")
+    public R login(){
+        return R.ok().put("data","hello world");
+    }
+
+
+    //房屋收藏
+    @RequestMapping("/ms/user/housecollect")
+    public R houseCollect( PageInfo pageInfo){
+        System.out.println(pageInfo.getPageNum()+pageInfo.getPageSize());
+        return  msRoomService.selectHouseCollect(pageInfo);
+    }
+
+
+    //查询旅客等级
+    @RequestMapping("/ms/user/sleepscore")
+    public R selectLerver(){
+        return service.selectLevler();
+    }
+
+    //试睡员申请提交
+    @RequestMapping("/ms/user/cansleep")
+    public R insertSleeper(@RequestBody MsSleeper msSleeper){
+        return service.insertSleeper(msSleeper);
+    }
+
+    //修改当前用户个人资料
+    @RequestMapping("/ms/user/mydata")
+    public R updateUser(@RequestBody MsUser msUser){
+        return service.updateUser(msUser);
+    }
 
     //注册账号时手机验证码
     @RequestMapping("/ms/user/code/{phone}")

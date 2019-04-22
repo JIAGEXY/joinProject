@@ -1,7 +1,8 @@
 package com.lh.service.impl;
 
+import com.lh.entity.MsSleeper;
 import com.lh.entity.MsUser;
-import com.lh.entity.MsUserExample;
+import com.lh.mapper.MsSleeperMapper;
 import com.lh.mapper.MsUserMapper;
 import com.lh.service.MsUserService;
 import com.lh.utils.R;
@@ -17,6 +18,9 @@ import java.util.List;
 public class MsUserServiceImpl implements MsUserService {
     @Resource
     private MsUserMapper mapper;
+
+    @Resource
+    private MsSleeperMapper msSleeperMapper;
 
     @Override
     public R register(MsUser user) {
@@ -74,5 +78,28 @@ public class MsUserServiceImpl implements MsUserService {
 
 
         return list.get(0);
+    }
+
+    @Override
+    public R selectLevler() {
+       MsUser user= (MsUser)ShiroUtils.getCurrentUser();
+       Integer level = user.getLevel();
+       return R.ok().put("data",level);
+    }
+
+    @Override
+    public R insertSleeper(MsSleeper msSleeper) {
+        int i = msSleeperMapper.insertSelective(msSleeper);
+        if(i>0)
+            return R.ok();
+        return R.error();
+    }
+
+    @Override
+    public R updateUser(MsUser msUser) {
+        int i = mapper.updateByPrimaryKeySelective(msUser);
+        if(i>0)
+            return R.ok();
+        return R.error();
     }
 }
