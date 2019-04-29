@@ -12,7 +12,7 @@ import com.lh.service.MsOrderService;
 import com.lh.utils.OrderStatus;
 import com.lh.utils.R;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,34 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼                  BUG辟易
- *
- * @Description:
- * @Date: 2019/4/16
- * @Time: 16:59
- */
 @Controller
+@CrossOrigin(allowCredentials="true")
 public class AliPayController {
     @Resource
     private MsOrderService msOrderService;
@@ -72,7 +46,7 @@ public class AliPayController {
             String total_amount = order.getMoney().toString();
             System.out.println(total_amount);
             // 商品描述，可空
-            String body = order.getDerinfo();
+            String body = order.getOrderinfo();
             // 超时时间 可空
             String timeout_express = "2m";
             // 销售产品码 必填
@@ -107,7 +81,6 @@ public class AliPayController {
                 response.getWriter().flush();
                 response.getWriter().close();
             } catch (AlipayApiException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

@@ -11,6 +11,7 @@
     <groupId>com.lh</groupId>
     <artifactId>join_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <!--<packaging>war</packaging>-->
     <name>join_project</name>
     <description>Demo project for Spring Boot</description>
 
@@ -179,6 +180,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.8</version>
         </dependency>
+         <!-- 屏蔽tomcat -->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>-->
     </dependencies>
 
     <build>

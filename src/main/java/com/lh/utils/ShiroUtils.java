@@ -13,7 +13,6 @@ public class ShiroUtils {
     public static Object getAttribute(String str){
         return SecurityUtils.getSubject().getSession().getAttribute(str);
     }
-
     public static void setAttribute(String k,Object v){
         SecurityUtils.getSubject().getSession().setAttribute(k,v);
     }

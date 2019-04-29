@@ -6,8 +6,6 @@ import com.lh.utils.R;
 
 public interface MsUserService {
 
-    R login(int nowPage,int pageSize,String search);
-
     R selectLevler();
 
     R insertSleeper(MsSleeper msSleeper);
@@ -21,7 +19,4 @@ public interface MsUserService {
     R updatePassword(MsUser user);
 
     MsUser findByPhone(String phone);
-
-
-
 }

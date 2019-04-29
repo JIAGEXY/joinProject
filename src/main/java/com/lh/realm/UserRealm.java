@@ -25,6 +25,7 @@ public class UserRealm extends AuthorizingRealm {
 
         MsUser user = (MsUser) principal.getPrimaryPrincipal();
         System.out.println(user.getUsername());
+
         List<String> roles = new ArrayList<>();
         List<String> perms = new ArrayList<>();
 
@@ -36,7 +37,6 @@ public class UserRealm extends AuthorizingRealm {
             roles.add("房东");
             perms.add("ms:landlord:*");
         }
-
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRoles(roles);
         info.addStringPermissions(perms);

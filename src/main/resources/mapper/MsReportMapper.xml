@@ -16,7 +16,7 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="text" jdbcType="VARCHAR" property="text" />
-    <result column="comId" jdbcType="VARCHAR" property="comid" />
+    <result column="comId" jdbcType="BIGINT" property="comid" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
   <sql id="Example_Where_Clause">

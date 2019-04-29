@@ -3,14 +3,12 @@ package com.lh.controller;
 import com.lh.entity.MsNotice;
 import com.lh.service.MsNoticeService;
 import com.lh.utils.R;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
+@CrossOrigin(allowCredentials="true")
 public class MsNoticeServlet {
     @Resource
     private MsNoticeService msNoticeService;

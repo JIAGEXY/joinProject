@@ -207,8 +207,6 @@ public class MsUser {
      */
     private Integer sleeperid;
 
-
-
     private String randNum;
 
     private String captcha;
@@ -771,5 +769,30 @@ public class MsUser {
      */
     public void setSleeperid(Integer sleeperid) {
         this.sleeperid = sleeperid;
+    }
+
+    @Override
+    public String toString() {
+        return "MsUser{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", realname='" + realname + '\'' +
+                ", age=" + age +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", type=" + type +
+                ", hobby='" + hobby + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", headphoto='" + headphoto + '\'' +
+                ", level=" + level +
+                ", integration=" + integration +
+                ", createtime=" + createtime +
+                ", bankcard='" + bankcard + '\'' +
+                ", sleeperid=" + sleeperid +
+                ", randNum='" + randNum + '\'' +
+                ", captcha='" + captcha + '\'' +
+                '}';
     }
 }

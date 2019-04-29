@@ -2,7 +2,7 @@ package com.lh.service;
 
 import com.lh.entity.MsOrder;
 import com.lh.utils.R;
-
+import java.util.Date;
 
 import java.util.List;
 
@@ -17,4 +17,6 @@ public interface MsOrderService {
     int updateALOrder(MsOrder order);
     //查询订单
     MsOrder selectALOrder(String ordernum);
+
+    R findOrderByStartDate(Date startDate);
 }

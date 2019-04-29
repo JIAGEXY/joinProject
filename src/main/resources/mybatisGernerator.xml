@@ -15,7 +15,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql:///ms"
                         userId="root"
-                        password="jiayu0217">
+                        password="123124">
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -37,14 +37,14 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="dcc_areas"/>
+        <!--<table tableName="dcc_areas"/>
         <table tableName="dcc_cities"/>
         <table tableName="dcc_provinces"/>
         <table tableName="ms_user"/>
         <table tableName="ms_room"/>
-        <table tableName="ms_desc"/>
+        <table tableName="ms_desc"/>-->
         <table tableName="ms_order"/>
-        <table tableName="ms_sleeper"/>
+        <!--<table tableName="ms_sleeper"/>
         <table tableName="ms_notice"/>
         <table tableName="ms_article"/>
         <table tableName="ms_report"/>
@@ -56,6 +56,7 @@
         <table tableName="ms_art_lable"/>
         <table tableName="ms_room_notice"/>
         <table tableName="ms_user_hobby"/>
+        <table tableName="ms_evaluation"/>-->
 
     </context>
 </generatorConfiguration>

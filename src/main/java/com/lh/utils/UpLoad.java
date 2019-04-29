@@ -1,8 +1,10 @@
 package com.lh.utils;
 
+import org.csource.common.MyException;
 import org.csource.fastdfs.*;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class UpLoad {
     //1.声明对象
@@ -14,7 +16,7 @@ public class UpLoad {
 
     public UpLoad() throws Exception{
         String path = this.getClass().getResource("/").getPath();
-        ClientGlobal.init(path+"client.conf");
+        ClientGlobal.init("client.conf");
         //监听器 服务端 客户端
         trackerClient = new TrackerClient();
         trackerServer = trackerClient.getConnection();
@@ -23,7 +25,7 @@ public class UpLoad {
     }
     public String upLoadFile(byte[] b,String suffix) throws Exception {
         String[] str = storageClient.upload_file(b,0,b.length,suffix,null);
-        return "http://www.nginxfdfs.com/"+str[0]+"/"+str[1];
+        return "http://59.110.228.151/"+str[0]+"/"+str[1];
     }
     public int deleteFile(String filename) throws Exception {
         return storageClient.delete_file("group1",filename);
