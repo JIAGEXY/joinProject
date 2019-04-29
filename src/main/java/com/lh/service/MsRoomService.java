@@ -19,4 +19,6 @@ public interface MsRoomService {
 
     R selectHouseCollect(PageInfo pageInfo);
     R allList(int pageNum,int pageSize,String range,String sort,String order,MsRoom msRoom);
+
+    R selectRoomSift(int artid, int pageSize);
 }

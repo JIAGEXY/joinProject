@@ -155,6 +155,8 @@ public class MsRoomServiceImpl implements MsRoomService {
         //价格
         if(StringUtil.isNotEmpty(range)){
             String[] ss = range.split("-");
+            System.out.println(ss[0]);
+            System.out.println(ss[1]);
             criteria.andPriceBetween(new BigDecimal(ss[0]),new BigDecimal(ss[1]) );
         }
         //户型
@@ -168,7 +170,7 @@ public class MsRoomServiceImpl implements MsRoomService {
 
         //条件查询
         // 降序、升序排列
-        if(sort!=null&&sort.equals(1)){
+        if(sort!=null && sort.equals(1)){
             sort = "1";
             example.setOrderByClause(sort+" "+order);
         }
@@ -176,5 +178,18 @@ public class MsRoomServiceImpl implements MsRoomService {
         PageInfo pageInfo=new PageInfo(list1);
         return R.ok().put("data",pageInfo);
 
+    }
+
+    @Override
+    public R selectRoomSift(int artid, int pageSize) {
+        PageHelper.offsetPage(0,pageSize);
+        List<MsRoom> msRooms = msRoomMapper.selectByExample(null);
+        PageInfo pageInfo=new PageInfo(msRooms);
+        System.out.println(pageInfo.getTotal());
+        System.out.println(pageInfo.getPages());
+        if(artid<pageInfo.getPages()){
+            pageInfo.setPageNum(artid);
+        }
+        return R.ok().put("data",pageInfo);
     }
 }

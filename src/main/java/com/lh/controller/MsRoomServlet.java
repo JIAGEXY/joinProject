@@ -105,7 +105,13 @@ public class MsRoomServlet {
     //查看房屋列表
     @RequestMapping("/ms/room/allList")
     public R allList(PageInfo info,
-                     @RequestParam(defaultValue = "null") String range,
-                     @RequestParam(defaultValue = "null") String sort,
-                     @RequestParam(defaultValue = "null") String order, MsRoom msRoom){ return msRoomService.allList(info.getPageNum(),info.getPageSize(),range,sort,order,msRoom); }
+                     @RequestParam(defaultValue ="",required=false) String range,
+                     @RequestParam(defaultValue ="",required = false) String sort,
+                     @RequestParam(defaultValue ="",required = false) String order, MsRoom msRoom){ return msRoomService.allList(info.getPageNum(),info.getPageSize(),range,sort,order,msRoom); }
+
+     //精选房屋
+    @RequestMapping("/ms/room/sift")
+    public R selectSift(@RequestParam(defaultValue ="1")int artid,@RequestParam(defaultValue ="4")int pageSize){
+        return msRoomService.selectRoomSift(artid,pageSize);
+    }
 }
