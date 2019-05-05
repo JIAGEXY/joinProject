@@ -4,10 +4,13 @@ import com.github.pagehelper.PageInfo;
 import com.lh.dto.Page;
 import com.lh.entity.MsEvaluation;
 import com.lh.entity.MsRoom;
+import com.lh.exception.RZException;
 import com.lh.service.MsEvaluationService;
 import com.lh.service.MsOrderService;
 import com.lh.service.MsRoomService;
+import com.lh.utils.ForUntil;
 import com.lh.utils.R;
+import com.lh.utils.ShiroUtils;
 import com.lh.utils.UpLoad;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,40 +34,45 @@ public class MsRoomServlet {
 
     @Resource
     private MsEvaluationService msEvaluationService;
+    //发布房屋图片
+    @RequestMapping("/ms/landlord/addHouseImg")
+    public R addHouseImg(MultipartFile[] img){
+        try {
+            StringBuilder roomImg = new StringBuilder();
+            ForUntil.toFor(img, roomImg);//遍历发布图片
+            MsRoom room = new MsRoom();
+            room.setRoomimg(roomImg.toString());
+            return msRoomService.insertImg(room);
+        } catch (Exception e) {
+            throw new RZException(e.getMessage());
+        }
+    }
     //发布房屋
     @RequestMapping("/ms/landlord/publish")
-    public R houseReleased(MsRoom room, @RequestParam(name = "img") MultipartFile img){
+    public R houseReleased(MsRoom room){
+        long roomId = (long) ShiroUtils.getAttribute("roomId");
+        room.setRoomid(roomId);
+        return msRoomService.update(room);
+    }
+    //修改房屋图片
+    @RequestMapping("/ms/landlord/updHouseImg")
+    public R updHouseImg(MultipartFile[] img){
         try {
-            //图片名字
-            String fileName = img.getOriginalFilename();
-            //后缀
-            String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
-            UpLoad upLoad = new UpLoad();
-            String roomImg = upLoad.upLoadFile(img.getBytes(),suffix);
-            room.setRoomimg(roomImg);
-            return msRoomService.insert(room);
+            StringBuilder roomImg = new StringBuilder();
+            ForUntil.toFor(img, roomImg);//遍历发布图片
+            MsRoom room = new MsRoom();
+            long roomId = (long) ShiroUtils.getAttribute("roomId");
+            room.setRoomid(roomId);
+            room.setRoomimg(roomImg.toString());
+            return msRoomService.updateImg(room);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RZException(e.getMessage());
         }
-        return R.error("发布房屋失败");
     }
     //修改房屋
     @RequestMapping("/ms/landlord/houseInfo")
-    public R houseUpdate(MsRoom room, @RequestParam(name = "img") MultipartFile img){
-        try {
-            //图片名字
-            String fileName = img.getOriginalFilename();
-            //后缀
-            String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
-            UpLoad upLoad = new UpLoad();
-            String roomImg = upLoad.upLoadFile(img.getBytes(),suffix);
-            room.setRoomimg(roomImg);
-            return msRoomService.update(room);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return R.error("修改房屋失败");
-    }
+    public R houseUpdate(MsRoom room){ return msRoomService.update(room); }
+
     //房东查看历史订单
     @RequestMapping("/ms/landlord/history")
     public R history(String startDate){
@@ -104,12 +112,13 @@ public class MsRoomServlet {
 
     //查看房屋列表
     @RequestMapping("/ms/room/allList")
-    public R allList(PageInfo info,
+    public R allList(@RequestParam(defaultValue ="1",required=false) int pageNum,
+                     @RequestParam(defaultValue ="5",required=false) int pageSize,
                      @RequestParam(defaultValue ="",required=false) String range,
                      @RequestParam(defaultValue ="",required = false) String sort,
-                     @RequestParam(defaultValue ="",required = false) String order, MsRoom msRoom){ return msRoomService.allList(info.getPageNum(),info.getPageSize(),range,sort,order,msRoom); }
+                     @RequestParam(defaultValue ="",required = false) String order, MsRoom msRoom){ return msRoomService.allList(pageNum,pageSize,range,sort,order,msRoom); }
 
-     //精选房屋
+    //精选房屋
     @RequestMapping("/ms/room/sift")
     public R selectSift(@RequestParam(defaultValue ="1")int artid,@RequestParam(defaultValue ="4")int pageSize){
         return msRoomService.selectRoomSift(artid,pageSize);

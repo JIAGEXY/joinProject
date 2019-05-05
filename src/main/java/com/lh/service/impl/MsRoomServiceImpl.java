@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.lh.entity.MsRoom;
 import com.lh.entity.MsRoomExample;
 import com.lh.entity.MsUser;
+import com.lh.exception.RZException;
 import com.lh.mapper.MsRoomMapper;
 import com.lh.service.MsRoomService;
 import com.lh.utils.R;
@@ -27,26 +28,41 @@ public class MsRoomServiceImpl implements MsRoomService {
     private MsRoomMapper msRoomMapper;
 
     @Override
+    public R insertImg(MsRoom room) {
+        int i = msRoomMapper.insert(room);
+        ShiroUtils.setAttribute("roomId",room.getRoomid());
+        return i>0?R.ok():R.error("发布房屋图片失败");
+    }
+
+    @Override
     public R insert(MsRoom room) {
         int i = msRoomMapper.insert(room);
         return i>0?R.ok():R.error("发布失败");
     }
 
     @Override
-    public R update(MsRoom room) {
+    public R updateImg(MsRoom room) {
         try {
             String img = msRoomMapper.selectByPrimaryKey(room.getRoomid()).getRoomimg();
             int i = msRoomMapper.updateByPrimaryKey(room);
             UpLoad upLoad = new UpLoad();
-            String filename = img.substring(img.lastIndexOf("M00"));
-            if (i>0) {
-                if (upLoad.deleteFile(filename)==0)return R.ok();
-                else throw new Exception("修改失败");
-            } else R.error("修改失败");
+            if (i>0){
+                String[] r = img.split("-");
+                for (String s : r) {
+                    String filename = s.substring(s.lastIndexOf("M00"));
+                    upLoad.deleteFile(filename);
+                }
+                return R.ok();
+            }else return R.error("修改房屋失败");
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RZException("修改房屋失败");
         }
-        return R.error("修改失败");
+    }
+
+    @Override
+    public R update(MsRoom room) {
+        int i =  msRoomMapper.updateByPrimaryKeySelective(room);
+        return i>0?R.ok():R.error("修改房屋失败");
     }
 
     @Override

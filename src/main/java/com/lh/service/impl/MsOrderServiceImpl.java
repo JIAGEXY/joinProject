@@ -1,10 +1,7 @@
 package com.lh.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.lh.entity.MsOrder;
-import com.lh.entity.MsOrderExample;
-import com.lh.entity.MsRoom;
-import com.lh.entity.MsUser;
+import com.lh.entity.*;
 import com.lh.mapper.MsOrderMapper;
 import com.lh.mapper.MsRoomMapper;
 import com.lh.service.MsOrderService;
@@ -73,6 +70,17 @@ public class MsOrderServiceImpl implements MsOrderService{
 
     @Override
     public R insertALOrder(MsOrder order) {
+        MsRoomExample e=new MsRoomExample();
+        MsRoomExample.Criteria c = e.createCriteria();
+        c.andRoomidEqualTo(order.getRoomid());
+        List<MsRoom> msRooms = msRoomMapper.selectByExample(e);
+        if(msRooms==null||msRooms.isEmpty()){
+            return R.error("不好意思，该房间不存在");
+        }
+        MsRoom msRoom = msRooms.get(0);
+        order.setMoney(msRoom.getPrice());
+        order.setDeposit(msRoom.getPrice().multiply(new BigDecimal("0.1")));
+        System.out.println("房间价格："+order.getDeposit());
 
         order.setOrderinfo("预定房屋");
         MsUser user=(MsUser)ShiroUtils.getCurrentUser();

@@ -7,7 +7,9 @@ import com.lh.utils.R;
 import java.util.List;
 
 public interface MsRoomService {
+    R insertImg(MsRoom room);
     R insert(MsRoom room);
+    R updateImg(MsRoom room);
     R update(MsRoom room);
     R addHouse(long userId);
 

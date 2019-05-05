@@ -1,8 +1,10 @@
 package com.lh.service;
 
+import com.lh.dto.UserDTO;
 import com.lh.entity.MsSleeper;
 import com.lh.entity.MsUser;
 import com.lh.utils.R;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface MsUserService {
 
@@ -10,7 +12,7 @@ public interface MsUserService {
 
     R insertSleeper(MsSleeper msSleeper);
 
-    R updateUser(MsUser msUser);
+    R updateUser(UserDTO msUser);
 
     R register(MsUser user);
 
@@ -19,4 +21,8 @@ public interface MsUserService {
     R updatePassword(MsUser user);
 
     MsUser findByPhone(String phone);
+
+    R selectUserInfo();
+
+    R updateUserHeadPhoto(MsUser user, String oldPhoto);
 }
