@@ -35,7 +35,7 @@ public class MsArticleServlet {
         try {
             UpLoad upLoad = new UpLoad();
             imgurl = upLoad.upLoadFile(img.getBytes(),suffix);
-            txturl = upLoad.upLoadFile(content.getBytes(),".txt");
+            txturl = upLoad.upLoadFile(content.getBytes(),"txt");
         }catch (Exception e){
             e.printStackTrace();
         }

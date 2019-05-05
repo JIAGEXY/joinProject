@@ -9,11 +9,13 @@ import com.lh.service.MsUserService;
 import com.lh.utils.LoginUtils;
 import com.lh.utils.R;
 import com.lh.utils.ShiroUtils;
+import com.lh.utils.UpLoad;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -34,11 +36,6 @@ public class MsUserServlet {
 
     @Resource
     private MsRoomService msRoomService;
-
-    @RequestMapping("/a")
-    public R login(){
-        return R.ok().put("data","hello world");
-    }
 
     //房屋收藏
     @RequestMapping("/ms/user/housecollect")
@@ -65,6 +62,25 @@ public class MsUserServlet {
         return msUserService.updateUser(msUser);
     }
 
+    //修改用户个人图片
+    @RequestMapping("/ms/user/headphoto")
+    public R updateUserHeadPhoto(MultipartFile img){
+        try {
+            //图片名字
+            String fileName = img.getOriginalFilename();
+            //后缀
+            String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
+            UpLoad upLoad = new UpLoad();
+            MsUser user = (MsUser) ShiroUtils.getCurrentUser();
+            String oldPhoto = user.getHeadphoto();
+            user.setHeadphoto(upLoad.upLoadFile(img.getBytes(),suffix));
+            return msUserService.updateUserHeadPhoto(user, oldPhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return R.error("修改头像失败");
+    }
+
     //注册账号时手机验证码
     @RequestMapping("/ms/user/code/{phone}")
     public void code(@PathVariable(value = "phone") String phone){
@@ -75,9 +91,8 @@ public class MsUserServlet {
     //用户注册
     @RequestMapping("/ms/user/register")
     public R register(@RequestBody MsUser user){
-        if(!ShiroUtils.getAttribute(user.getPhone()).equals(user.getRandNum())){
-            return R.error("验证码错误");
-        }
+        if(ShiroUtils.getAttribute(user.getPhone())==null){ return R.error("请获取验证码"); }
+        if(!ShiroUtils.getAttribute(user.getPhone()).equals(user.getRandNum())){ return R.error("验证码错误,请重新输入"); }
         Md5Hash hash = new Md5Hash(user.getPassword(),user.getUsername(),1024);
         String password = hash.toString();
         user.setPassword(password);
@@ -137,4 +152,9 @@ public class MsUserServlet {
         ShiroUtils.logout();
         return R.ok();
     }
+
+    //查看用户个人资料
+    @RequestMapping("/ms/user/info")
+    public R selectUserInfo(){ return msUserService.selectUserInfo(); }
+
 }

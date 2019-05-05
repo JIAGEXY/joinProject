@@ -25,6 +25,7 @@ public class UpLoad {
     }
     public String upLoadFile(byte[] b,String suffix) throws Exception {
         String[] str = storageClient.upload_file(b,0,b.length,suffix,null);
+        System.out.println("http://59.110.228.151/"+str[0]+"/"+str[1]);
         return "http://59.110.228.151/"+str[0]+"/"+str[1];
     }
     public int deleteFile(String filename) throws Exception {
